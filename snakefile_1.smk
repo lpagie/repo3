@@ -7,16 +7,17 @@ REPO_DIR = os.path.dirname(os.path.abspath(SNAKEFILE))
 print("repo_dir = "+str(REPO_DIR))
 
 
-# module other_workflow:
-#   snakefile: github("lpagie/repo2", path="snakefile_2.smk", commit="61f60f7")
-#   config: config
-# 
-# use rule * from other_workflow as wf2_*
-
+module other_workflow:
+  snakefile: github("lpagie/repo2", path="snakefile_2.smk", commit="61f60f7")
+  config: config
 
 rule all:
   input:
-    "output/final"
+    "output/final",
+    "output/final_wf2"
+
+use rule * from other_workflow as wf2_*
+
 
 rule A:
   input:
